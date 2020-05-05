@@ -66,7 +66,7 @@
         <zip destfile="${dist.dir}/${dist.filename.windows}.zip">
             <!-- Using pre-built executable files that come with the Constellation icon -->
             <!--<zipfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
-            <zipfileset dir="${basedir}/distribution/" filemode="755" prefix="${app.name}"/>
+            <zipfileset dir="${basedir}/distribution/" filemode="755" includes="*.bat, bin/*.exe" prefix="${app.name}"/>
             <zipfileset dir="${build.launcher.dir}/etc/" prefix="${app.name}/etc"/>
             <zipfileset dir="${temp.dir.nbexec}" filemode="755" prefix="${app.name}"/>
             <zipfileset dir="${temp.dir.rest}" prefix="${app.name}"/>
@@ -119,6 +119,7 @@
             <!--<tarfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
             <tarfileset dir="${basedir}/distribution/" filemode="755" prefix="${app.name}" uid="${nobody}" gid="${nobody}">
                 <exclude name="*.bat"/>
+                <exclude name="bin/*.exe"/>
             </tarfileset>
             <tarfileset dir="${build.launcher.dir}/etc/" prefix="${app.name}/etc" uid="${nobody}" gid="${nobody}"/>
             <tarfileset dir="${temp.dir.nbexec}" filemode="755" prefix="${app.name}" uid="${nobody}" gid="${nobody}"/>
@@ -180,6 +181,7 @@
             <!--<tarfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
             <tarfileset dir="${basedir}/distribution/" filemode="755" prefix="${app.name}" uid="${nobody}" gid="${nobody}">
                 <exclude name="*.bat"/>
+                <exclude name="bin/*.exe"/>
             </tarfileset>
             <tarfileset dir="${build.launcher.dir}/etc/" prefix="${app.name}/etc" uid="${nobody}" gid="${nobody}"/>
             <tarfileset dir="${temp.dir.nbexec}" filemode="755" prefix="${app.name}" uid="${nobody}" gid="${nobody}"/>
