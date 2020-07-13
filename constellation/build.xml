@@ -5,30 +5,17 @@
     <import file="nbproject/build-impl.xml"/>
     
     <!-- build jre zips -->
-    <property name="dist.version" value="v2.0.0-beta2"/>
-    <property name="jre.filename.windows" value="zulu11.37.19-ca-fx-jre11.0.6-win_x64"/>
+    <property name="dist.version" value="v2.0.0-rc1"/>
+    <property name="jre.filename.windows" value="zulu11.39.15-ca-fx-jre11.0.7-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
-    <property name="jre.filename.macosx" value="zulu11.37.19-ca-fx-jre11.0.6-macosx_x64"/>
+    <property name="jre.filename.macosx" value="zulu11.37.19-ca-fx-jre11.0.6-macosx_x64"/><!-- zulu11.39.15-ca-fx-jre11.0.7-macosx_x64 Azul distribution is broken -->
     <property name="jre.url.macosx" value="https://cdn.azul.com/zulu/bin/${jre.filename.macosx}.tar.gz"/>
-    <property name="jre.filename.linux" value="zulu11.37.19-ca-fx-jre11.0.6-linux_x64"/>
+    <property name="jre.filename.linux" value="zulu11.39.15-ca-fx-jre11.0.7-linux_x64"/>
     <property name="jre.url.linux" value="https://cdn.azul.com/zulu/bin/${jre.filename.linux}.tar.gz"/>
     <property name="dist.filename.linux" value="constellation-linux-${dist.version}"/>
     <property name="dist.filename.windows" value="constellation-win-${dist.version}"/>
     <property name="dist.filename.macosx" value="constellation-macosx-${dist.version}"/>
     <property name="nobody" value="65534"/>
-
-    <target name="build-brand" depends="-init">
-        <propertyfile file="${basedir}/branding/core/core.jar/org/netbeans/core/startup/Bundle.properties">
-            <!-- comment="Updated by build script"> -->
-            <entry key="currentVersion" value="${app.title} ${app.version}" />
-        </propertyfile>
-
-        <propertyfile file="${basedir}/branding/modules/org-netbeans-core-windows.jar/org/netbeans/core/windows/view/ui/Bundle.properties">
-            <!-- comment="Updated by build script"> -->
-            <entry key="CTL_MainWindow_Title" value="${app.title} ${app.version}" />
-            <entry key="CTL_MainWindow_Title_No_Project" value="${app.title} ${app.version}" />
-        </propertyfile>
-    </target>
     
     <!-- Windows Section -->
 
@@ -87,7 +74,7 @@
         <get src="${jre.url.macosx}"
              dest="${basedir}" usetimestamp="true"/>
         <untar src="${basedir}/${jre.filename.macosx}.tar.gz" dest="${basedir}" compression="gzip"/>
-        <delete file="${basedir}/${jre.filename.macosx}.zip"/>
+        <delete file="${basedir}/${jre.filename.macosx}.tar.gz"/>
     </target>
 
     <!-- This is a copy of build-zip-with-windows-jre", if there is a better way to do this then let me know -->

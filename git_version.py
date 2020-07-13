@@ -64,9 +64,9 @@ def updateManifest(projectDir, version):
 
 def getBundle(manifest):
     projectDir = manifest[PROJECT_DIR]
-    print "Processing: "+projectDir
+    print("Processing: " + projectDir)
     if MF_BUNDLE not in manifest:
-        print "Skipping %s" % projectDir
+        print("Skipping %s" % projectDir)
         return None
     else:
         bundleName = manifest[MF_BUNDLE]
@@ -100,9 +100,9 @@ def getGitChangeSetTimeStamp(path):
     p = subprocess.Popen(cmd, bufsize=0, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out,err = p.communicate()
     if err:
-        print '!!'
-        print '!!', err
-        print '!!'
+        print('!!')
+        print('!!', err)
+        print('!!')
         out = None
     if not out:
         cmd = ['git','log', '-1', '--pretty=format:%ct', '--', path]
@@ -110,11 +110,11 @@ def getGitChangeSetTimeStamp(path):
         p = subprocess.Popen(cmd, bufsize=0, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out,err = p.communicate()
         if err:
-            print '!!'
-            print '!!', err
-            print '!!'
+            print('!!')
+            print('!!', err)
+            print('!!')
             out = None
-    print 'UNIX timestamp: %s' % out
+    print('UNIX timestamp: %s' % out)
     out = datetime.datetime.fromtimestamp(float(out))
     out = out.strftime("%Y%m%d.%H%M%S")
 
@@ -146,16 +146,16 @@ def main(argv):
   try:
     opts, args = getopt.getopt(argv,"hu:",["force-update="])
   except getopt.GetoptError:
-    print 'Usage:\n%s -b <build-number> -u <force_update [y/N]>' % sys.argv[0]
+    print('Usage:\n%s -b <build-number> -u <force_update [y/N]>' % sys.argv[0])
     sys.exit(2)
   for opt, arg in opts:
     if opt == 'h':
-      print 'Usage:\n%s -b <build-number> -u <force_update [y/N]>' % sys.argv[0]
+      print('Usage:\n%s -b <build-number> -u <force_update [y/N]>' % sys.argv[0])
       sys.exit(1)
     elif opt in ("-u", "--force-update"):
       force_update = arg
 
-  print 'Build Number is "', build_number, '"'
+  print('Build Number is "', build_number, '"')
 
   # Get a list of all directories in the current directory
   moduleDirectories = set()
@@ -194,7 +194,7 @@ def main(argv):
       if version:
           b = getBundle(module)
           moduleName = b[B_MODULE_NAME]
-          print '%-25s %s %s (next version is %s)' % (moduleName, module[PROJECT_DIR], version, getNextVersion(version, getGitChangeSetTimeStamp(module[PROJECT_DIR])))
+          print('%-25s %s %s (next version is %s)' % (moduleName, module[PROJECT_DIR], version, getNextVersion(version, getGitChangeSetTimeStamp(module[PROJECT_DIR]))))
 
   # Update?
   #
@@ -209,7 +209,7 @@ def main(argv):
           module = modules[m]
           projDir = module[PROJECT_DIR]
           versionNext = getNextVersion(module[MF_VERSION], getGitChangeSetTimeStamp(projDir))
-          print projDir, versionNext
+          print(projDir, versionNext)
           updateManifest(projDir, versionNext)
 
 if __name__ == "__main__":
