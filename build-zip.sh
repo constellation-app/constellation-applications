@@ -19,15 +19,16 @@ ant \
   -Dnbplatform.default.harness.dir="${NETBEANS_HOME}"/harness \
   -Dbuild.compiler.debug=true update-dependencies-clean-build
 
-title "Update Manifest Files"
+title "Update Manifest Files with new versions"
 
 cd ../constellation
 python3 ../constellation-applications/git_version.py -u y
 cd ../constellation-adaptors
 python3 ../constellation-applications/git_version.py -u y
 
-title "Build Windows Zip"
 cd ../constellation-applications/constellation
+
+title "Build Windows Zip"
 
 ant \
   -Dnbplatform.active.dir="${NETBEANS_HOME}" \
