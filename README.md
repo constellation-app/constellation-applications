@@ -13,16 +13,20 @@ Constellation available on [the official website](https://constellation-app.com)
 
 # List of Applications
 
-* Constellation - The version of Constellation available from 
+## Constellation
+
+The version of Constellation available from 
 [the official website](https://constellation-app.com) and includes the following 
 module suites:
-    * [Constellation](https://github.com/constellation-app/constellation) and
+    * [Constellation](https://github.com/constellation-app/constellation)
     * [Constellation Adaptors](https://github.com/constellation-app/constellation-adaptors)
 
-* Constellation Cyber - A special distribution of Constellation for Cyber analysts
-and is also available from the [the official website](https://constellation-app.com) 
-and includes the following module suites:
-    * [Constellation](https://github.com/constellation-app/constellation) and
+## Constellation Cyber
+
+A special distribution of Constellation for Cyber analysts and is also available 
+from the [the official website](https://constellation-app.com) and includes the 
+following module suites:
+    * [Constellation](https://github.com/constellation-app/constellation)
     * [Constellation Adaptors](https://github.com/constellation-app/constellation-adaptors)
     * [Constellation Cyber Plugins](https://github.com/AustralianCyberSecurityCentre/constellation_cyber_plugins)
 
@@ -77,7 +81,8 @@ git clone https://github.com/AustralianCyberSecurityCentre/constellation_cyber_p
 git clone https://github.com/constellation-app/constellation-applications.git
 sudo docker run -v "$PWD:/code" -v "$HOME/.ivy2:/root/.ivy2" --workdir \
   "/code/constellation-applications" constellationapplication/netbeans-runner:12 \
-  ./build-zip.sh -a constellation-cyber -m "constellation constellation-adaptors constellation_cyber_plugins"
+  ./build-zip.sh -a constellation-cyber \
+  -m "constellation constellation-adaptors constellation_cyber_plugins"
 ```
 
 This will build distributions of Constellation for Windows, Linux and MacOSX and will be available from `constellation-applications/constellation-cyber/dist`
