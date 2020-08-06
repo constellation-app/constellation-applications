@@ -18,17 +18,17 @@ Constellation available on [the official website](https://constellation-app.com)
 The version of Constellation available from 
 [the official website](https://constellation-app.com) and includes the following 
 module suites:
-    * [Constellation](https://github.com/constellation-app/constellation)
-    * [Constellation Adaptors](https://github.com/constellation-app/constellation-adaptors)
+  * [Constellation](https://github.com/constellation-app/constellation)
+  * [Constellation Adaptors](https://github.com/constellation-app/constellation-adaptors)
 
 ## Constellation Cyber
 
 A special distribution of Constellation for Cyber analysts and is also available 
 from the [the official website](https://constellation-app.com) and includes the 
 following module suites:
-    * [Constellation](https://github.com/constellation-app/constellation)
-    * [Constellation Adaptors](https://github.com/constellation-app/constellation-adaptors)
-    * [Constellation Cyber Plugins](https://github.com/AustralianCyberSecurityCentre/constellation_cyber_plugins)
+  * [Constellation](https://github.com/constellation-app/constellation)
+  * [Constellation Adaptors](https://github.com/constellation-app/constellation-adaptors)
+  * [Constellation Cyber Plugins](https://github.com/AustralianCyberSecurityCentre/constellation_cyber_plugins)
 
 # Build Constellation Applications
 
