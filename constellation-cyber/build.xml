@@ -5,7 +5,7 @@
     <import file="nbproject/build-impl.xml"/>
     
     <!-- build jre zips -->
-    <property name="dist.version" value="v1.0.0"/>
+    <property name="dist.version" value="v1.2.0"/>
     <property name="jre.filename.windows" value="zulu11.37.19-ca-fx-jre11.0.6-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
     <property name="jre.filename.macosx" value="zulu11.37.19-ca-fx-jre11.0.6-macosx_x64"/><!-- zulu11.39.15-ca-fx-jre11.0.7-macosx_x64 Azul distribution is broken -->
