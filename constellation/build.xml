@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Constellation Application" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:if="ant:if" xmlns:unless="ant:unless">
     <description>Builds the Constellation module suite which is hosted on https://constellation-app.com</description>
-    
+
     <import file="nbproject/build-impl.xml"/>
-    
+
     <!-- build jre zips -->
-    <property name="dist.version" value="v2.3.0"/>
-    <property name="jre.filename.windows" value="zulu11.37.19-ca-fx-jre11.0.6-win_x64"/>
+    <property name="dist.version" value="v2.4.0-rc1"/>
+    <property name="jre.name" value="zulu11.50.19-ca-fx-jre11.0.12"/>
+    <property name="jre.filename.windows" value="${jre.name}-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
-    <property name="jre.filename.macosx" value="zulu11.37.19-ca-fx-jre11.0.6-macosx_x64"/><!-- zulu11.39.15-ca-fx-jre11.0.7-macosx_x64 Azul distribution is broken -->
+    <property name="jre.filename.macosx" value="${jre.name}-macosx_x64"/>
     <property name="jre.url.macosx" value="https://cdn.azul.com/zulu/bin/${jre.filename.macosx}.tar.gz"/>
-    <property name="jre.filename.linux" value="zulu11.37.19-ca-fx-jre11.0.6-linux_x64"/>
+    <property name="jre.filename.linux" value="${jre.name}-linux_x64"/>
     <property name="jre.url.linux" value="https://cdn.azul.com/zulu/bin/${jre.filename.linux}.tar.gz"/>
     <property name="dist.filename.linux" value="constellation-linux-${dist.version}"/>
     <property name="dist.filename.windows" value="constellation-win-${dist.version}"/>
     <property name="dist.filename.macosx" value="constellation-macosx-${dist.version}"/>
     <property name="nobody" value="65534"/>
-    
+
     <!-- Windows Section -->
 
     <target name="-download-windows-jre" >
@@ -27,7 +28,7 @@
         <delete file="${basedir}/${jre.filename.windows}.zip"/>
     </target>
 
-    <target name="build-zip-with-windows-jre" depends="build,build-launchers,-download-windows-jre" 
+    <target name="build-zip-with-windows-jre" depends="build,build-launchers,-download-windows-jre"
             description="Builds a ZIP distribution of the suite, launchers, and selected modules from the platform. This includes the JRE for Windows.">
         <mkdir dir="${dist.dir}"/>
         <!-- pathfileset does not support 'prefix' and 'filemode' parameters, we have to copy them to temp location -->
@@ -43,13 +44,13 @@
                  destdir="${build.launcher.dir}/etc/"
                  preservelastmodified="true"
                  eol="crlf" />
-        
+
         <!-- work around to get the modified help jars to the build -->
         <copy file="${nbplatform.default.netbeans.dest.dir}/platform/modules/ext/jhall-2.0_05.jar" todir="${temp.dir.rest}/platform/modules/ext" verbose="true"/>
-        
+
         <!-- delete the harness folder which is only required for testing -->
         <delete dir="${temp.dir.rest}/harness"/>
-                
+
         <zip destfile="${dist.dir}/${dist.filename.windows}.zip">
             <!-- Using pre-built executable files that come with the Constellation icon -->
             <!--<zipfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
@@ -65,7 +66,7 @@
         </zip>
         <delete dir="${basedir}/${jre.filename.windows}/"/>
     </target>
-    
+
     <!-- MacOSX Section -->
 
     <!-- This is a copy of -download-windows-jre, if there is a better way to do this then let me know -->
@@ -78,7 +79,7 @@
     </target>
 
     <!-- This is a copy of build-zip-with-windows-jre", if there is a better way to do this then let me know -->
-    <target name="build-zip-with-macosx-jre" depends="build,build-launchers,-download-macosx-jre" 
+    <target name="build-zip-with-macosx-jre" depends="build,build-launchers,-download-macosx-jre"
             description="Builds a ZIP distribution of the suite, launchers, and selected modules from the platform. This includes the JRE for MacOSX.">
         <mkdir dir="${dist.dir}"/>
         <!-- pathfileset does not support 'prefix' and 'filemode' parameters, we have to copy them to temp location -->
@@ -94,13 +95,13 @@
                  destdir="${build.launcher.dir}/etc/"
                  preservelastmodified="true"
                  eol="lf" />
-        
+
         <!-- work around to get the modified help jars to the build -->
         <copy file="${nbplatform.default.netbeans.dest.dir}/platform/modules/ext/jhall-2.0_05.jar" todir="${temp.dir.rest}/platform/modules/ext" verbose="true"/>
-        
+
         <!-- delete the harness folder which is only required for testing -->
         <delete dir="${temp.dir.rest}/harness"/>
-        
+
         <tar destfile="${dist.dir}/${dist.filename.macosx}.tar">
             <!-- Using pre-built executable files that come with the Constellation icon -->
             <!--<tarfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
@@ -127,7 +128,7 @@
         <delete file="${dist.dir}/${dist.filename.macosx}.tar"/>
         <delete dir="${basedir}/${jre.filename.macosx}/"/>
     </target>
-    
+
     <!-- Linux Section -->
 
     <!-- This is a copy of -download-windows-jre, if there is a better way to do this then let me know -->
@@ -140,7 +141,7 @@
     </target>
 
     <!-- This is a copy of build-zip-with-windows-jre", if there is a better way to do this then let me know -->
-    <target name="build-zip-with-linux-jre" depends="build,build-launchers,-download-linux-jre" 
+    <target name="build-zip-with-linux-jre" depends="build,build-launchers,-download-linux-jre"
             description="Builds a ZIP distribution of the suite, launchers, and selected modules from the platform. This includes the JRE for Linux.">
         <mkdir dir="${dist.dir}"/>
         <!-- pathfileset does not support 'prefix' and 'filemode' parameters, we have to copy them to temp location -->
@@ -156,13 +157,13 @@
                  destdir="${build.launcher.dir}/etc/"
                  preservelastmodified="true"
                  eol="lf" />
-        
+
         <!-- work around to get the modified help jars to the build -->
         <copy file="${nbplatform.default.netbeans.dest.dir}/platform/modules/ext/jhall-2.0_05.jar" todir="${temp.dir.rest}/platform/modules/ext" verbose="true"/>
-        
+
         <!-- delete the harness folder which is only required for testing -->
         <delete dir="${temp.dir.rest}/harness"/>
-        
+
         <tar destfile="${dist.dir}/${dist.filename.linux}.tar">
             <!-- Using pre-built executable files that come with the Constellation icon -->
             <!--<tarfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
