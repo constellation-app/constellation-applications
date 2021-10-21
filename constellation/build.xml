@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Constellation Application" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:if="ant:if" xmlns:unless="ant:unless">
     <description>Builds the Constellation module suite which is hosted on https://constellation-app.com</description>
-    
+
     <import file="nbproject/build-impl.xml"/>
-    
+
     <!-- build jre zips -->
     <property name="dist.version" value="v2.3.0"/>
     <property name="jre.filename.windows" value="zulu11.37.19-ca-fx-jre11.0.6-win_x64"/>
@@ -16,7 +16,16 @@
     <property name="dist.filename.windows" value="constellation-win-${dist.version}"/>
     <property name="dist.filename.macosx" value="constellation-macosx-${dist.version}"/>
     <property name="nobody" value="65534"/>
-    
+
+    <property name="help.deploy.dir" value="dist/constellation/constellation"/>
+    <property name="help.docs.dir" value="**/docs"/>
+    <property name="help.docs.resources.dir" value="**/docs/resources"/>
+    <property name="help.type.md" value="**.md"/>
+    <property name="help.type.png" value="**.png"/>
+    <property name="help.type.jpg" value="**.jpg"/>
+    <property name="help.bootstrap.dir" value="bootstrap/**"/>
+    <property name="help.toc.file" value="toc.md"/>
+
     <!-- Windows Section -->
 
     <target name="-download-windows-jre" >
@@ -27,7 +36,7 @@
         <delete file="${basedir}/${jre.filename.windows}.zip"/>
     </target>
 
-    <target name="build-zip-with-windows-jre" depends="build,build-launchers,-download-windows-jre" 
+    <target name="build-zip-with-windows-jre" depends="build,build-launchers,-download-windows-jre"
             description="Builds a ZIP distribution of the suite, launchers, and selected modules from the platform. This includes the JRE for Windows.">
         <mkdir dir="${dist.dir}"/>
         <!-- pathfileset does not support 'prefix' and 'filemode' parameters, we have to copy them to temp location -->
@@ -43,13 +52,41 @@
                  destdir="${build.launcher.dir}/etc/"
                  preservelastmodified="true"
                  eol="crlf" />
-        
-        <!-- work around to get the modified help jars to the build -->
-        <copy file="${nbplatform.default.netbeans.dest.dir}/platform/modules/ext/jhall-2.0_05.jar" todir="${temp.dir.rest}/platform/modules/ext" verbose="true"/>
-        
+
         <!-- delete the harness folder which is only required for testing -->
         <delete dir="${temp.dir.rest}/harness"/>
-                
+
+        <copy todir="${dist.dir}/${dist.filename.windows}/${app.name}" overwrite="true" includeEmptyDirs="false">
+            <fileset dir="${basedir}\..\..\${app.name}">
+                <include name="${help.toc.file}"/>
+                <include name="${help.bootstrap.dir}"/>
+                <include name="${help.docs.dir}/${help.type.md}"/>
+                <include name="${help.docs.dir}/${help.type.png}"/>
+                <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                <exclude name="docs/**"/>
+                <exclude name="**/build/**"/>
+                <exclude name="${help.deploy.dir}/**"/>
+            </fileset>
+        </copy>
+        <copy todir="${dist.dir}/${dist.filename.windows}/constellation-adaptors" overwrite="true" includeEmptyDirs="false">
+            <fileset dir="${basedir}\..\..\constellation-adaptors">
+                <include name="${help.toc.file}"/>
+                <include name="${help.bootstrap.dir}"/>
+                <include name="${help.docs.dir}/${help.type.md}"/>
+                <include name="${help.docs.dir}/${help.type.png}"/>
+                <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                <exclude name="docs/**"/>
+                <exclude name="**/build/**"/>
+                <exclude name="${help.deploy.dir}/**"/>
+            </fileset>
+        </copy>
+
         <zip destfile="${dist.dir}/${dist.filename.windows}.zip">
             <!-- Using pre-built executable files that come with the Constellation icon -->
             <!--<zipfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
@@ -58,14 +95,19 @@
             <zipfileset dir="${temp.dir.nbexec}" filemode="755" prefix="${app.name}"/>
             <zipfileset dir="${temp.dir.rest}" prefix="${app.name}"/>
             <zipfileset dir="${basedir}/${jre.filename.windows}/" prefix="${app.name}/jre"/>
+            <zipfileset dir="${dist.dir}/${dist.filename.windows}/${app.name}" prefix="${app.name}/${app.name}"/>
+            <zipfileset dir="${dist.dir}/${dist.filename.windows}/constellation-adaptors" prefix="${app.name}/${app.name}-adaptors"/>
             <!-- Yes, the doubled app.name is a bit ugly, but better than the alternative; cf. #66441: -->
             <zipfileset dir="${cluster}" prefix="${app.name}/${app.name}">
                 <exclude name="config/Modules/*.xml_hidden"/>
             </zipfileset>
         </zip>
         <delete dir="${basedir}/${jre.filename.windows}/"/>
+        <delete dir="${dist.dir}/${dist.filename.windows}/${app.name}"/>
+        <delete dir="${dist.dir}/${dist.filename.windows}/constellation-adaptors"/>
+        <delete dir="${dist.dir}/${dist.filename.windows}"/>
     </target>
-    
+
     <!-- MacOSX Section -->
 
     <!-- This is a copy of -download-windows-jre, if there is a better way to do this then let me know -->
@@ -78,7 +120,7 @@
     </target>
 
     <!-- This is a copy of build-zip-with-windows-jre", if there is a better way to do this then let me know -->
-    <target name="build-zip-with-macosx-jre" depends="build,build-launchers,-download-macosx-jre" 
+    <target name="build-zip-with-macosx-jre" depends="build,build-launchers,-download-macosx-jre"
             description="Builds a ZIP distribution of the suite, launchers, and selected modules from the platform. This includes the JRE for MacOSX.">
         <mkdir dir="${dist.dir}"/>
         <!-- pathfileset does not support 'prefix' and 'filemode' parameters, we have to copy them to temp location -->
@@ -94,13 +136,26 @@
                  destdir="${build.launcher.dir}/etc/"
                  preservelastmodified="true"
                  eol="lf" />
-        
-        <!-- work around to get the modified help jars to the build -->
-        <copy file="${nbplatform.default.netbeans.dest.dir}/platform/modules/ext/jhall-2.0_05.jar" todir="${temp.dir.rest}/platform/modules/ext" verbose="true"/>
-        
+
         <!-- delete the harness folder which is only required for testing -->
         <delete dir="${temp.dir.rest}/harness"/>
-        
+
+        <copy todir="${dist.dir}/${dist.filename.macosx}/${app.name}" overwrite="true" includeEmptyDirs="false">
+            <fileset dir="${basedir}\..\..\${app.name}">
+                <include name="${help.toc.file}"/>
+                <include name="${help.bootstrap.dir}"/>
+                <include name="${help.docs.dir}/${help.type.md}"/>
+                <include name="${help.docs.dir}/${help.type.png}"/>
+                <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                <exclude name="docs/**"/>
+                <exclude name="**/build/**"/>
+                <exclude name="${help.deploy.dir}/**"/>
+            </fileset>
+        </copy>
+
         <tar destfile="${dist.dir}/${dist.filename.macosx}.tar">
             <!-- Using pre-built executable files that come with the Constellation icon -->
             <!--<tarfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
@@ -118,6 +173,8 @@
             </tarfileset>
             <tarfileset dir="${basedir}/${jre.filename.macosx}/bin/" filemode="755" prefix="${app.name}/jre/bin" uid="${nobody}" gid="${nobody}"/>
 
+            <tarfileset dir="${dist.dir}/${dist.filename.macosx}/${app.name}" prefix="${app.name}/${app.name}" uid="${nobody}" gid="${nobody}"/>
+
             <!-- Yes, the doubled app.name is a bit ugly, but better than the alternative; cf. #66441: -->
             <tarfileset dir="${cluster}" prefix="${app.name}/${app.name}" uid="${nobody}" gid="${nobody}">
                 <exclude name="config/Modules/*.xml_hidden"/>
@@ -126,8 +183,10 @@
         <gzip src="${dist.dir}/${dist.filename.macosx}.tar" destfile="${dist.dir}/${dist.filename.macosx}.tar.gz"/>
         <delete file="${dist.dir}/${dist.filename.macosx}.tar"/>
         <delete dir="${basedir}/${jre.filename.macosx}/"/>
+        <delete dir="${dist.dir}/${dist.filename.macosx}/${app.name}"/>
+        <delete dir="${dist.dir}/${dist.filename.macosx}"/>
     </target>
-    
+
     <!-- Linux Section -->
 
     <!-- This is a copy of -download-windows-jre, if there is a better way to do this then let me know -->
@@ -140,7 +199,7 @@
     </target>
 
     <!-- This is a copy of build-zip-with-windows-jre", if there is a better way to do this then let me know -->
-    <target name="build-zip-with-linux-jre" depends="build,build-launchers,-download-linux-jre" 
+    <target name="build-zip-with-linux-jre" depends="build,build-launchers,-download-linux-jre"
             description="Builds a ZIP distribution of the suite, launchers, and selected modules from the platform. This includes the JRE for Linux.">
         <mkdir dir="${dist.dir}"/>
         <!-- pathfileset does not support 'prefix' and 'filemode' parameters, we have to copy them to temp location -->
@@ -156,13 +215,11 @@
                  destdir="${build.launcher.dir}/etc/"
                  preservelastmodified="true"
                  eol="lf" />
-        
-        <!-- work around to get the modified help jars to the build -->
-        <copy file="${nbplatform.default.netbeans.dest.dir}/platform/modules/ext/jhall-2.0_05.jar" todir="${temp.dir.rest}/platform/modules/ext" verbose="true"/>
-        
+
+
         <!-- delete the harness folder which is only required for testing -->
         <delete dir="${temp.dir.rest}/harness"/>
-        
+
         <tar destfile="${dist.dir}/${dist.filename.linux}.tar">
             <!-- Using pre-built executable files that come with the Constellation icon -->
             <!--<tarfileset dir="${build.launcher.dir}/bin/" filemode="755" prefix="${app.name}/bin"/>-->
