@@ -155,6 +155,21 @@
                 <exclude name="${help.deploy.dir}/**"/>
             </fileset>
         </copy>
+        <copy todir="${dist.dir}/${dist.filename.macosx}/constellation-adaptors" overwrite="true" includeEmptyDirs="false">
+            <fileset dir="${basedir}\..\..\constellation-adaptors">
+                <include name="${help.toc.file}"/>
+                <include name="${help.bootstrap.dir}"/>
+                <include name="${help.docs.dir}/${help.type.md}"/>
+                <include name="${help.docs.dir}/${help.type.png}"/>
+                <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                <exclude name="docs/**"/>
+                <exclude name="**/build/**"/>
+                <exclude name="${help.deploy.dir}/**"/>
+            </fileset>
+        </copy>
 
         <tar destfile="${dist.dir}/${dist.filename.macosx}.tar">
             <!-- Using pre-built executable files that come with the Constellation icon -->
@@ -174,7 +189,7 @@
             <tarfileset dir="${basedir}/${jre.filename.macosx}/bin/" filemode="755" prefix="${app.name}/jre/bin" uid="${nobody}" gid="${nobody}"/>
 
             <tarfileset dir="${dist.dir}/${dist.filename.macosx}/${app.name}" prefix="${app.name}/${app.name}" uid="${nobody}" gid="${nobody}"/>
-
+            <tarfileset dir="${dist.dir}/${dist.filename.macosx}/constellation-adaptors" prefix="${app.name}/${app.name}-adaptors" uid="${nobody}" gid="${nobody}"/>
             <!-- Yes, the doubled app.name is a bit ugly, but better than the alternative; cf. #66441: -->
             <tarfileset dir="${cluster}" prefix="${app.name}/${app.name}" uid="${nobody}" gid="${nobody}">
                 <exclude name="config/Modules/*.xml_hidden"/>
@@ -184,6 +199,7 @@
         <delete file="${dist.dir}/${dist.filename.macosx}.tar"/>
         <delete dir="${basedir}/${jre.filename.macosx}/"/>
         <delete dir="${dist.dir}/${dist.filename.macosx}/${app.name}"/>
+        <delete dir="${dist.dir}/${dist.filename.macosx}/constellation-adaptors"/>
         <delete dir="${dist.dir}/${dist.filename.macosx}"/>
     </target>
 
@@ -217,8 +233,40 @@
                  eol="lf" />
 
 
-        <!-- delete the harness folder which is only required for testing -->
-        <delete dir="${temp.dir.rest}/harness"/>
+         <!-- delete the harness folder which is only required for testing -->
+         <delete dir="${temp.dir.rest}/harness"/>
+
+         <copy todir="${dist.dir}/${dist.filename.linux}/${app.name}" overwrite="true" includeEmptyDirs="false">
+             <fileset dir="${basedir}\..\..\${app.name}">
+                 <include name="${help.toc.file}"/>
+                 <include name="${help.bootstrap.dir}"/>
+                 <include name="${help.docs.dir}/${help.type.md}"/>
+                 <include name="${help.docs.dir}/${help.type.png}"/>
+                 <include name="${help.docs.dir}/${help.type.jpg}"/>
+                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                 <exclude name="docs/**"/>
+                 <exclude name="**/build/**"/>
+                 <exclude name="${help.deploy.dir}/**"/>
+             </fileset>
+         </copy>
+         <copy todir="${dist.dir}/${dist.filename.linux}/constellation-adaptors" overwrite="true" includeEmptyDirs="false">
+             <fileset dir="${basedir}\..\..\constellation-adaptors">
+                 <include name="${help.toc.file}"/>
+                 <include name="${help.bootstrap.dir}"/>
+                 <include name="${help.docs.dir}/${help.type.md}"/>
+                 <include name="${help.docs.dir}/${help.type.png}"/>
+                 <include name="${help.docs.dir}/${help.type.jpg}"/>
+                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                 <exclude name="docs/**"/>
+                 <exclude name="**/build/**"/>
+                 <exclude name="${help.deploy.dir}/**"/>
+             </fileset>
+         </copy>
+
 
         <tar destfile="${dist.dir}/${dist.filename.linux}.tar">
             <!-- Using pre-built executable files that come with the Constellation icon -->
@@ -236,7 +284,8 @@
                 <exclude name="bin/*"/>
             </tarfileset>
             <tarfileset dir="${basedir}/${jre.filename.linux}/bin/" filemode="755" prefix="${app.name}/jre/bin" uid="${nobody}" gid="${nobody}"/>
-
+            <tarfileset dir="${dist.dir}/${dist.filename.linux}/${app.name}" prefix="${app.name}/${app.name}" uid="${nobody}" gid="${nobody}"/>
+            <tarfileset dir="${dist.dir}/${dist.filename.linux}/constellation-adaptors" prefix="${app.name}/${app.name}-adaptors" uid="${nobody}" gid="${nobody}"/>
             <!-- Yes, the doubled app.name is a bit ugly, but better than the alternative; cf. #66441: -->
             <tarfileset dir="${cluster}" prefix="${app.name}/${app.name}" uid="${nobody}" gid="${nobody}">
                 <exclude name="config/Modules/*.xml_hidden"/>
@@ -245,6 +294,9 @@
         <gzip src="${dist.dir}/${dist.filename.linux}.tar" destfile="${dist.dir}/${dist.filename.linux}.tar.gz"/>
         <delete file="${dist.dir}/${dist.filename.linux}.tar"/>
         <delete dir="${basedir}/${jre.filename.linux}/"/>
+        <delete dir="${dist.dir}/${dist.filename.linux}/${app.name}"/>
+        <delete dir="${dist.dir}/${dist.filename.linux}/constellation-adaptors"/>
+        <delete dir="${dist.dir}/${dist.filename.linux}"/>
     </target>
 
 </project>
