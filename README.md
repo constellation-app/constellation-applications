@@ -41,7 +41,14 @@ should be updated to specify the version number like the following:
 private static final String VERSION = "v1.0.0";
 ```
 
-To build Constellation you can use Docker and run something like this:
+Next, navigate to `constellation-applications` and update
+`constellation/build.xml` and change the line to look like
+
+```xml
+<property name="dist.version" value="v1.0.0"/>
+```
+
+Finally, to build Constellation you can use Docker and run something like this:
 
 ```bash
 cd workspace
@@ -64,6 +71,13 @@ should be updated to specify the version number like the following:
 
 ```java
 private static final String VERSION = "v1.0.0";
+```
+
+Next, navigate to `constellation-applications` and update
+`constellation-cyber/build.xml` and change the line to look like
+
+```xml
+<property name="dist.version" value="v1.0.0"/>
 ```
 
 Also the application branding should be updated by updating `CoreUtilities/src/au/gov/asd/tac/constellation/utilities/BrandingUtilities.java`
