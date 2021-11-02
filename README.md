@@ -62,6 +62,8 @@ sudo docker run -v "$PWD:/code" -v "$HOME/.ivy2:/root/.ivy2" --workdir \
 
 This will build distributions of Constellation for Windows, Linux and MacOSX and will be available from `constellation-applications/constellation/dist`
 
+NOTE: To include updated help documentation, running the applications constellation-adaptors will generate an updated toc.md file.
+
 ## Build Constellation Cyber
 
 Prior to building Constellation, `CoreFunctionality/src/au/gov/asd/tac/constellation/functionality/startup/Startup.java`
@@ -100,6 +102,8 @@ sudo docker run -v "$PWD:/code" -v "$HOME/.ivy2:/root/.ivy2" --workdir \
 ```
 
 This will build distributions of Constellation for Windows, Linux and MacOSX and will be available from `constellation-applications/constellation-cyber/dist`
+
+NOTE: To include updated help documentation, running the applications constellation-adaptors and constellation_cyber_plugins will generate an updated toc.md file.
 
 ## More Information
 
