@@ -34,7 +34,8 @@ function no_files_removed {
 }
 
 function remove_files {
-    echo rm -rf $1
+    rm -rf $1
+    echo "Files removed"
 }
 
 directory=""
