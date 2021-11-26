@@ -9,9 +9,9 @@ REM  Author        : arcturus
 REM  Version       : 1.0
 REM  Last Modified : 26/11/2021
 
-set app_name=CONSTELLATION
+set app_name=constellation
 
-set directory=%userprofile%\.%app_name%
+set directory=%appdata%\.%app_name%
 
 if not exist %directory% (
   goto ask_directory

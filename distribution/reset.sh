@@ -23,7 +23,7 @@ function try_bat {
 function ask_directory {
     echo "The directory $directory was not found."
     echo ""
-    echo "What is the location of your Constellation user direcotory? You can find it by running Constellation and selecting Help -> About and look for the user directory location."
+    echo "What is the location of your Constellation user directory? You can find it by running Constellation and selecting Help -> About and look for the user directory location."
     echo ""
 
     read -p "Enter the location (or Ctrl + C to cancel): " directory
