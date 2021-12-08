@@ -26,6 +26,7 @@
     <property name="help.type.jpg" value="**.jpg"/>
     <property name="help.bootstrap.dir" value="bootstrap/**"/>
     <property name="help.toc.file" value="toc.md"/>
+    <property name="help.toc.modulefile" value="**-toc.xml"/>
 
     <!-- Windows Section -->
 
@@ -64,6 +65,7 @@
                 <include name="${help.docs.dir}/${help.type.md}"/>
                 <include name="${help.docs.dir}/${help.type.png}"/>
                 <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.dir}/${help.toc.modulefile}"/>
                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
@@ -79,6 +81,7 @@
                 <include name="${help.docs.dir}/${help.type.md}"/>
                 <include name="${help.docs.dir}/${help.type.png}"/>
                 <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.dir}/${help.toc.modulefile}"/>
                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
@@ -148,6 +151,7 @@
                 <include name="${help.docs.dir}/${help.type.md}"/>
                 <include name="${help.docs.dir}/${help.type.png}"/>
                 <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.dir}/${help.toc.modulefile}"/>
                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
@@ -163,6 +167,7 @@
                 <include name="${help.docs.dir}/${help.type.md}"/>
                 <include name="${help.docs.dir}/${help.type.png}"/>
                 <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.dir}/${help.toc.modulefile}"/>
                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
@@ -244,6 +249,7 @@
                  <include name="${help.docs.dir}/${help.type.md}"/>
                  <include name="${help.docs.dir}/${help.type.png}"/>
                  <include name="${help.docs.dir}/${help.type.jpg}"/>
+                 <include name="${help.docs.dir}/${help.toc.modulefile}"/>
                  <include name="${help.docs.resources.dir}/${help.type.md}"/>
                  <include name="${help.docs.resources.dir}/${help.type.png}"/>
                  <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
@@ -259,6 +265,7 @@
                  <include name="${help.docs.dir}/${help.type.md}"/>
                  <include name="${help.docs.dir}/${help.type.png}"/>
                  <include name="${help.docs.dir}/${help.type.jpg}"/>
+                 <include name="${help.docs.dir}/${help.toc.modulefile}"/>
                  <include name="${help.docs.resources.dir}/${help.type.md}"/>
                  <include name="${help.docs.resources.dir}/${help.type.png}"/>
                  <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
