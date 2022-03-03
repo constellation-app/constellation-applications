@@ -5,7 +5,7 @@
     <import file="nbproject/build-impl.xml"/>
 
     <!-- build jre zips -->
-    <property name="dist.version" value="v2.4.0-rc2"/>
+    <property name="dist.version" value="v2.6.0"/>
     <property name="jre.name" value="zulu11.37.19-ca-fx-jre11.0.6"/>
     <property name="jre.filename.windows" value="${jre.name}-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
@@ -239,41 +239,41 @@
                  eol="lf" />
 
 
-         <!-- delete the harness folder which is only required for testing -->
-         <delete dir="${temp.dir.rest}/harness"/>
+        <!-- delete the harness folder which is only required for testing -->
+        <delete dir="${temp.dir.rest}/harness"/>
 
-         <copy todir="${dist.dir}/${dist.filename.linux}/${app.name}" overwrite="true" includeEmptyDirs="false">
-             <fileset dir="${basedir}\..\..\${app.name}">
-                 <include name="${help.toc.file}"/>
-                 <include name="${help.bootstrap.dir}"/>
-                 <include name="${help.docs.dir}/${help.type.md}"/>
-                 <include name="${help.docs.dir}/${help.type.png}"/>
-                 <include name="${help.docs.dir}/${help.type.jpg}"/>
-                 <include name="${help.docs.dir}/${help.toc.modulefile}"/>
-                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
-                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
-                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
-                 <exclude name="docs/**"/>
-                 <exclude name="**/build/**"/>
-                 <exclude name="${help.deploy.dir}/**"/>
-             </fileset>
-         </copy>
-         <copy todir="${dist.dir}/${dist.filename.linux}/constellation-adaptors" overwrite="true" includeEmptyDirs="false">
-             <fileset dir="${basedir}\..\..\constellation-adaptors">
-                 <include name="${help.toc.file}"/>
-                 <include name="${help.bootstrap.dir}"/>
-                 <include name="${help.docs.dir}/${help.type.md}"/>
-                 <include name="${help.docs.dir}/${help.type.png}"/>
-                 <include name="${help.docs.dir}/${help.type.jpg}"/>
-                 <include name="${help.docs.dir}/${help.toc.modulefile}"/>
-                 <include name="${help.docs.resources.dir}/${help.type.md}"/>
-                 <include name="${help.docs.resources.dir}/${help.type.png}"/>
-                 <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
-                 <exclude name="docs/**"/>
-                 <exclude name="**/build/**"/>
-                 <exclude name="${help.deploy.dir}/**"/>
-             </fileset>
-         </copy>
+        <copy todir="${dist.dir}/${dist.filename.linux}/${app.name}" overwrite="true" includeEmptyDirs="false">
+            <fileset dir="${basedir}\..\..\${app.name}">
+                <include name="${help.toc.file}"/>
+                <include name="${help.bootstrap.dir}"/>
+                <include name="${help.docs.dir}/${help.type.md}"/>
+                <include name="${help.docs.dir}/${help.type.png}"/>
+                <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.dir}/${help.toc.modulefile}"/>
+                <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                <exclude name="docs/**"/>
+                <exclude name="**/build/**"/>
+                <exclude name="${help.deploy.dir}/**"/>
+            </fileset>
+        </copy>
+        <copy todir="${dist.dir}/${dist.filename.linux}/constellation-adaptors" overwrite="true" includeEmptyDirs="false">
+            <fileset dir="${basedir}\..\..\constellation-adaptors">
+                <include name="${help.toc.file}"/>
+                <include name="${help.bootstrap.dir}"/>
+                <include name="${help.docs.dir}/${help.type.md}"/>
+                <include name="${help.docs.dir}/${help.type.png}"/>
+                <include name="${help.docs.dir}/${help.type.jpg}"/>
+                <include name="${help.docs.dir}/${help.toc.modulefile}"/>
+                <include name="${help.docs.resources.dir}/${help.type.md}"/>
+                <include name="${help.docs.resources.dir}/${help.type.png}"/>
+                <include name="${help.docs.resources.dir}/${help.type.jpg}"/>
+                <exclude name="docs/**"/>
+                <exclude name="**/build/**"/>
+                <exclude name="${help.deploy.dir}/**"/>
+            </fileset>
+        </copy>
 
 
         <tar destfile="${dist.dir}/${dist.filename.linux}.tar">
