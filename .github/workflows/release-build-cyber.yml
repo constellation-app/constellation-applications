@@ -1,4 +1,7 @@
-name: Create Release Build
+# This file was originally sourced from constellation-app/constellation/.github/workflows/release-build.yml
+# If fundamental changes are made to this file then consider contributing them back to the source file.
+
+name: Create Release Build (Cyber)
 
 on: workflow_dispatch
  
@@ -7,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUNNER_IMAGE: "constellationapplication/netbeans-runner:12.0.4"
-      ADAPTORS_VERSION: "v2.7.0-rc1"
+      CYBER_VERSION: "v2.7.0"
     container:
       image: docker://pandoc/latex:2.9
       options: --entrypoint=bash
@@ -31,6 +34,11 @@ jobs:
         with:
           repository: constellation-app/constellation-adaptors
           path: ./workspace/constellation-adaptors
+      - name: Checkout Constellation Cyber repository
+        uses: actions/checkout@v2
+        with:
+          repository: AustralianCyberSecurityCentre/constellation_cyber_plugins
+          path: ./workspace/constellation_cyber_plugins
       - name: Checkout Constellation Applications repository
         uses: actions/checkout@v2
         with:
@@ -38,7 +46,8 @@ jobs:
           path: ./workspace/constellation-applications
       - name: Update Version Number
         run: |
-               sed -i "s/(under development)/$ADAPTORS_VERSION/" ./workspace/constellation/CoreFunctionality/src/au/gov/asd/tac/constellation/functionality/startup/Startup.java
+               sed -i "s/(under development)/$CYBER_VERSION/" ./workspace/constellation/CoreFunctionality/src/au/gov/asd/tac/constellation/functionality/startup/Startup.java
+               sed 's/"Constellation";/"Constellation Cyber";/' ./workspace/constellation/CoreUtilities/src/au/gov/asd/tac/constellation/utilities/BrandingUtilities.java
       - name: Add Execute Privilege to Scripts
         run: |
               chmod +x ./workspace/constellation-applications/build-zip.sh
@@ -49,23 +58,23 @@ jobs:
             docker run -e GIT_DISCOVERY_ACROSS_FILESYSTEM=1 \
             --mount "type=bind,source=/,target=/home/runner/work/constellation" \
             --workdir /home/runner/work/constellation/home/runner/work/constellation/constellation/workspace/constellation-applications \
-            constellationapplication/netbeans-runner:12 \
-            ./build-zip.sh -a constellation -m "constellation constellation-adaptors"
+            "${RUNNER_IMAGE}" \
+            ./build-zip.sh -a constellation-cyber -m "constellation constellation-adaptors constellation_cyber_plugins"
       - name: Upload Linux Build
         uses: actions/upload-artifact@v2.3.0
         with:
           name: Linux Release Build
-          path: ./workspace/constellation-applications/constellation/dist/constellation-linux**
+          path: ./workspace/constellation-applications/constellation-cyber/dist/constellation-linux**
           retention-days: 2
       - name: Upload MacOS Build
         uses: actions/upload-artifact@v2.3.0
         with:
           name: MacOSX Release Build
-          path: ./workspace/constellation-applications/constellation/dist/constellation-macosx**
+          path: ./workspace/constellation-applications/constellation-cyber/dist/constellation-macosx**
           retention-days: 2
       - name: Upload Windows Build
         uses: actions/upload-artifact@v2.3.0
         with:
           name: Windows Release Build
-          path: ./workspace/constellation-applications/constellation/dist/constellation-win**.zip
+          path: ./workspace/constellation-applications/constellation-cyber/dist/constellation-win**.zip
           retention-days: 2
