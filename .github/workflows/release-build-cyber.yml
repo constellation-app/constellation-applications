@@ -56,9 +56,9 @@ jobs:
         run: |
             docker pull "${RUNNER_IMAGE}"
             docker run -e GIT_DISCOVERY_ACROSS_FILESYSTEM=1 \
-            --mount "type=bind,source=/,target=/home/runner/work/constellation" \
-            --workdir /home/runner/work/constellation/home/runner/work/constellation/constellation/workspace/constellation-applications \
-            constellationapplication/netbeans-runner:12 \
+            --mount "type=bind,source=$(pwd),target=/code" \
+            --workdir /code/workspace/constellation-applications \
+            ${RUNNER_IMAGE} \
             ./build-zip.sh -a constellation-cyber -m "constellation constellation-adaptors constellation_cyber_plugins"
       - name: Upload Linux Build
         uses: actions/upload-artifact@v2.3.0
