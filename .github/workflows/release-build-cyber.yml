@@ -39,33 +39,48 @@ jobs:
 
       - name: Update Version
         run: |
-               sed -i "s/(under development)/$VERSION/" constellation/CoreFunctionality/src/au/gov/asd/tac/constellation/functionality/startup/Startup.java
-               sed 's/"Constellation";/"Constellation Cyber";/' constellation/CoreUtilities/src/au/gov/asd/tac/constellation/utilities/BrandingUtilities.java
+          sed -i "s/(under development)/$VERSION/" constellation/CoreFunctionality/src/au/gov/asd/tac/constellation/functionality/startup/Startup.java
+          sed -i 's/"Constellation";/"Constellation Cyber";/' constellation/CoreUtilities/src/au/gov/asd/tac/constellation/utilities/BrandingUtilities.java
 
       # The module versions need to ideally be downgraded in AustralianCyberSecurityCentre/constellation_cyber_plugins via a PR
       - name: Temporary Workaround
         run: |
-               sed -i "s/9.15.1/9.15/" constellation_cyber_plugins/CyberImportExportPlugins/nbproject/project.xml
-               sed -i "s/8.41.1/8.41/" constellation_cyber_plugins/CyberImportExportPlugins/nbproject/project.xml
-               sed -i "s/9.16.1/9.16/" constellation_cyber_plugins/CyberImportExportPlugins/nbproject/project.xml
+          sed -i "s/9.15.1/9.15/" constellation_cyber_plugins/CyberImportExportPlugins/nbproject/project.xml
+          sed -i "s/8.41.1/8.41/" constellation_cyber_plugins/CyberImportExportPlugins/nbproject/project.xml
+          sed -i "s/9.16.1/9.16/" constellation_cyber_plugins/CyberImportExportPlugins/nbproject/project.xml
+
+      # Cache the ivy dependencies
+      - name: Restore Ivy Cache
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.ivy2
+          key: ${{ runner.os }}-ivy-${{ hashFiles('constellation/CoreDependencies/src/ivy.xml') }}
+
+      - name: Create Ivy Cache
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: |
+          mkdir ~/.ivy2
 
       - name: Add Execute Privilege to Scripts
         run: |
-              chmod +x constellation-applications/build-zip.sh
-              chmod +x constellation-applications/functions.sh
+          chmod +x constellation-applications/build-zip.sh
+          chmod +x constellation-applications/functions.sh
 
-      - uses: addnab/docker-run-action@v3
+      - name: Build Zips
+        uses: addnab/docker-run-action@v3
         with:
           image: constellationapplication/netbeans-runner:12.0.4
           options: |
             --volume ${{ github.workspace }}:/code 
+            --volume /home/runner/.ivy2:/root/.ivy2
             --workdir /code/constellation-applications
           run: |
             ./build-zip.sh -a constellation-cyber -m "constellation constellation-adaptors constellation_cyber_plugins"
 
       - name: Show Built Releases
         run: |
-              ls -l constellation-applications/constellation-cyber/dist
+          ls -l constellation-applications/constellation-cyber/dist
 
       - name: Upload Linux Build
         uses: actions/upload-artifact@v2.3.0
