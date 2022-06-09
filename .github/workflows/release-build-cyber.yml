@@ -86,19 +86,19 @@ jobs:
         uses: actions/upload-artifact@v2.3.0
         with:
           name: Linux Release Build
-          path: constellation-applications/constellation-cyber/dist/constellation-linux**
+          path: constellation-applications/constellation-cyber/dist/constellation-cyber-linux**
           retention-days: 1
 
       - name: Upload MacOS Build
         uses: actions/upload-artifact@v2.3.0
         with:
           name: MacOSX Release Build
-          path: constellation-applications/constellation-cyber/dist/constellation-macosx**
+          path: constellation-applications/constellation-cyber/dist/constellation-cyber-macosx**
           retention-days: 1
 
       - name: Upload Windows Build
         uses: actions/upload-artifact@v2.3.0
         with:
           name: Windows Release Build
-          path: constellation-applications/constellation-cyber/dist/constellation-win**.zip
+          path: constellation-applications/constellation-cyber/dist/constellation-cyber-win**.zip
           retention-days: 1
