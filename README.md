@@ -56,7 +56,7 @@ git clone https://github.com/constellation-app/constellation.git
 git clone https://github.com/constellation-app/constellation-adaptors.git
 git clone https://github.com/constellation-app/constellation-applications.git
 sudo docker run -v "$PWD:/code" -v "$HOME/.ivy2:/root/.ivy2" --workdir \
-  "/code/constellation-applications" constellationapplication/netbeans-runner:12.0.4 \
+  "/code/constellation-applications" constellationapplication/netbeans-runner:21.0.1 \
   ./build-zip.sh -a constellation -m "constellation constellation-adaptors"
 ```
 
@@ -96,7 +96,7 @@ git clone https://github.com/constellation-app/constellation-adaptors.git
 git clone https://github.com/AustralianCyberSecurityCentre/constellation_cyber_plugins.git
 git clone https://github.com/constellation-app/constellation-applications.git
 sudo docker run -v "$PWD:/code" -v "$HOME/.ivy2:/root/.ivy2" --workdir \
-  "/code/constellation-applications" constellationapplication/netbeans-runner:12.0.4 \
+  "/code/constellation-applications" constellationapplication/netbeans-runner:21.0.1 \
   ./build-zip.sh -a constellation-cyber \
   -m "constellation constellation-adaptors constellation_cyber_plugins"
 ```
