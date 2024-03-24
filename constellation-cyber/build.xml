@@ -5,12 +5,12 @@
     <import file="nbproject/build-impl.xml"/>
 
     <!-- build jre zips -->
-    <property name="dist.version" value="v1.10.0"/>
-    <property name="jre.filename.windows" value="zulu11.37.19-ca-fx-jre11.0.6-win_x64"/>
+    <property name="dist.version" value="v3.0.0-alpha"/>
+    <property name="jre.filename.windows" value="zulu21.32.17-ca-fx-jre21.0.2-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
-    <property name="jre.filename.macosx" value="zulu11.37.19-ca-fx-jre11.0.6-macosx_x64"/><!-- zulu11.39.15-ca-fx-jre11.0.7-macosx_x64 Azul distribution is broken -->
+    <property name="jre.filename.macosx" value="zulu21.32.17-ca-fx-jre21.0.2-macosx_x64"/><!-- zulu11.39.15-ca-fx-jre11.0.7-macosx_x64 Azul distribution is broken -->
     <property name="jre.url.macosx" value="https://cdn.azul.com/zulu/bin/${jre.filename.macosx}.tar.gz"/>
-    <property name="jre.filename.linux" value="zulu11.37.19-ca-fx-jre11.0.6-linux_x64"/>
+    <property name="jre.filename.linux" value="zulu21.32.17-ca-fx-jre21.0.2-linux_x64"/>
     <property name="jre.url.linux" value="https://cdn.azul.com/zulu/bin/${jre.filename.linux}.tar.gz"/>
     <property name="dist.filename.linux" value="constellation-cyber-linux-${dist.version}"/>
     <property name="dist.filename.windows" value="constellation-cyber-win-${dist.version}"/>
