@@ -10,7 +10,7 @@
     <property name="jre.filename.windows" value="${jre.name}-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
     <property name="jre.filename.macosx" value="${jre.name}-macosx_x64"/>
-    <property name="jre.url.macosx" value="https://cdn.azul.com/zulu/bin/${jre.filename.macosx}.tar.gz"/>
+    <property name="jre.url.macosx" value="https://cdn.azul.com/zulu/bin/${jre.filename.macosx}.zip"/>
     <property name="jre.filename.linux" value="${jre.name}-linux_x64"/>
     <property name="jre.url.linux" value="https://cdn.azul.com/zulu/bin/${jre.filename.linux}.tar.gz"/>
     <property name="dist.filename.linux" value="constellation-linux-${dist.version}"/>
@@ -71,8 +71,8 @@
         <echo message="downloading JRE..."/>
         <get src="${jre.url.macosx}"
              dest="${basedir}" usetimestamp="true"/>
-        <untar src="${basedir}/${jre.filename.macosx}.tar.gz" dest="${basedir}" compression="gzip"/>
-        <delete file="${basedir}/${jre.filename.macosx}.tar.gz"/>
+		<unzip src="${basedir}/${jre.filename.macosx}.zip" dest="${basedir}"/>
+        <delete file="${basedir}/${jre.filename.macosx}.zip"/>
     </target>
 
     <!-- This is a copy of build-zip-with-windows-jre", if there is a better way to do this then let me know -->

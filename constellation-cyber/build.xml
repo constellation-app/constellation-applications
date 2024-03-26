@@ -8,8 +8,8 @@
     <property name="dist.version" value="v3.0.0-alpha"/>
     <property name="jre.filename.windows" value="zulu21.32.17-ca-fx-jre21.0.2-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
-    <property name="jre.filename.macosx" value="zulu21.32.17-ca-fx-jre21.0.2-macosx_x64"/><!-- zulu11.39.15-ca-fx-jre11.0.7-macosx_x64 Azul distribution is broken -->
-    <property name="jre.url.macosx" value="https://cdn.azul.com/zulu/bin/${jre.filename.macosx}.tar.gz"/>
+    <property name="jre.filename.macosx" value="zulu21.32.17-ca-fx-jre21.0.2-macosx_x64"/>
+    <property name="jre.url.macosx" value="https://cdn.azul.com/zulu/bin/${jre.filename.macosx}.zip"/>
     <property name="jre.filename.linux" value="zulu21.32.17-ca-fx-jre21.0.2-linux_x64"/>
     <property name="jre.url.linux" value="https://cdn.azul.com/zulu/bin/${jre.filename.linux}.tar.gz"/>
     <property name="dist.filename.linux" value="constellation-cyber-linux-${dist.version}"/>
@@ -70,8 +70,8 @@
         <echo message="downloading JRE..."/>
         <get src="${jre.url.macosx}"
              dest="${basedir}" usetimestamp="true"/>
-        <untar src="${basedir}/${jre.filename.macosx}.tar.gz" dest="${basedir}" compression="gzip"/>
-        <delete file="${basedir}/${jre.filename.macosx}.tar.gz"/>
+        <unzip src="${basedir}/${jre.filename.macosx}.zip" dest="${basedir}"/>
+        <delete file="${basedir}/${jre.filename.macosx}.zip"/>
     </target>
 
     <!-- This is a copy of build-zip-with-windows-jre", if there is a better way to do this then let me know -->
