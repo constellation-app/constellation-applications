@@ -71,7 +71,9 @@
         <echo message="downloading JRE..."/>
         <get src="${jre.url.macosx}"
              dest="${basedir}" usetimestamp="true"/>
-		<unzip src="${basedir}/${jre.filename.macosx}.zip" dest="${basedir}"/>
+		<exec executable="unzip">
+            <arg value="${basedir}/${jre.filename.macosx}.zip"/>
+        </exec>
         <delete file="${basedir}/${jre.filename.macosx}.zip"/>
     </target>
 
