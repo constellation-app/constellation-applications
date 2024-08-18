@@ -5,7 +5,7 @@
     <import file="nbproject/build-impl.xml"/>
 
     <!-- build jre zips -->
-    <property name="dist.version" value="v3.0.0-rc1"/>
+    <property name="dist.version" value="v3.0.0-rc2"/>
     <property name="jre.name" value="zulu21.32.17-ca-fx-jre21.0.2"/>
     <property name="jre.filename.windows" value="${jre.name}-win_x64"/>
     <property name="jre.url.windows" value="https://cdn.azul.com/zulu/bin/${jre.filename.windows}.zip"/>
